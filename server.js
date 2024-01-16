@@ -39,6 +39,17 @@ app.delete('/accounts/:id', (req, res) => {
     res.status(204).send("Account deleted successfully");  // Send a success response with no content
 });
 
+// Endpoint to get a specific account by ID
+app.get('/accounts/:id', (req, res) => {
+    const accountId = req.params.id;
+    if (store.accounts[accountId]) {
+        res.status(200).send(store.accounts[accountId]);
+    } else {
+        res.status(404).send("Account not found");
+    }
+});
+
+
 // Launch the server on port 3000
 app.listen(3000);
 console.log("Server is running on port 3000");
